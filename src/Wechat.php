@@ -17,6 +17,11 @@ class Wechat
      */
     public $credential;
 
+    /**
+     * Wechat api gateway.
+     *
+     * @var string
+     */
     protected $baseUri = "https://api.weixin.qq.com/cgi-bin/";
 
     /**
