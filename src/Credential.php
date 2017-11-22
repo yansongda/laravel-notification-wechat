@@ -77,6 +77,10 @@ class Credential implements AccessTokenInterface
     public function getToken()
     {
         if (! isset($this->accessToken)) {
+            if (is_null($this->appid) || is_null($this->appsecret)) {
+                throw new AccessTokenException("Appid or appsecret is null", 1);
+            }
+
             $this->accessToken = Cache::remember('wechatAccessToken_' . $this->appid, 7190/60, function () {
                 $data = $this->get('token', [
                     'grant_type' => 'client_credential',
@@ -85,7 +89,7 @@ class Credential implements AccessTokenInterface
                 ]);
 
                 if (! isset($data['access_token'])) {
-                    throw new AccessTokenException($data['errmsg'], $data['errcode'], $data);
+                    throw new AccessTokenException('Error Get AccessToken:' . $data['errmsg'], $data['errcode'], $data);
                 }
 
                 return $data['access_token'];
