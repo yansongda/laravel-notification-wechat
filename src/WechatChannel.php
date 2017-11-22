@@ -3,6 +3,7 @@
 namespace Yansongda\LaravelNotificationWechat;
 
 use Illuminate\Notifications\Notification;
+use Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface;
 
 class WechatChannel
 {
@@ -37,14 +38,16 @@ class WechatChannel
     {
         $message = $notification->toWechat($notifiable);
 
-        if ($message->credential != null) {
+        if (is_string($message->credential)) {
             $credential = (new Credential())->setToken($message->credential);
 
             $this->wechat = new Wechat($credential);
+        } elseif ($message->credential instanceof AccessTokenInterface) {
+            $this->wechat = new Wechat($message->credential);
         }
 
         $params = $message->toJson();
 
-        $this->wechat->sendMessage($params);
+        return $this->wechat->sendMessage($params);
     }
 }

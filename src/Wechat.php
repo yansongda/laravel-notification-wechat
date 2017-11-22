@@ -36,6 +36,15 @@ class Wechat
         $this->credential = $credential;
     }
 
+    /**
+     * Send template message.
+     *
+     * @author yansongda <me@yansongda.cn>
+     *
+     * @param string $params
+     *
+     * @return array
+     */
     public function sendMessage($params)
     {
         $data = $this->post('message/template/send', $params, [
@@ -47,5 +56,7 @@ class Wechat
         if ($data['errcode'] != 0) {
             throw new SendTemplateMessageException($data['errmsg'], $data['errcode'], $data);
         }
+
+        return $data;
     }
 }
