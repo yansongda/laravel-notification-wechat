@@ -2,8 +2,10 @@
 
 namespace Yansongda\LaravelNotificationWechat;
 
-use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\ServiceProvider;
+use Yansongda\LaravelNotificationWechat\Credential;
+use Yansongda\LaravelNotificationWechat\Wechat;
+use Yansongda\LaravelNotificationWechat\WechatChannel;
 
 class WechatServiceProvider extends ServiceProvider
 {
@@ -15,7 +17,9 @@ class WechatServiceProvider extends ServiceProvider
         $this->app->when(WechatChannel::class)
             ->needs(Wechat::class)
             ->give(function () {
-                return new Wechat(new HttpClient());
+                return new Wechat(
+                    new Credential(config('services.wechat.appid'), config('services.wechat.appsecret'))
+                );
             });
     }
 

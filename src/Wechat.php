@@ -2,16 +2,22 @@
 
 namespace Yansongda\LaravelNotificationWechat;
 
-use GuzzleHttp\Client as HttpClient;
+use Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface;
+use Yansongda\LaravelNotificationWechat\Exceptions\SendTemplateMessageException;
+use Yansongda\Supports\Traits\HasHttpRequest;
 
 class Wechat
 {
+    use HasHttpRequest;
+
     /**
-     * Http client
+     * Credential.
      *
-     * @var HttpClient
+     * @var AccessTokenInterface
      */
-    protected $http;
+    public $credential;
+
+    protected $baseUri = "https://api.weixin.qq.com/cgi-bin/";
 
     /**
      * Bootstrap.
@@ -20,28 +26,21 @@ class Wechat
      *
      * @param HttpClient|null $http
      */
-    public function __construct(HttpClient $http = null)
+    public function __construct(AccessTokenInterface $credential)
     {
-        $this->http = $http;
-    }
-
-    /**
-     * Get HttpClient.
-     *
-     * @return HttpClient
-     */
-    protected function httpClient()
-    {
-        return $this->http ?: $this->http = new HttpClient();
+        $this->credential = $credential;
     }
 
     public function sendMessage($params)
     {
-        # code...
-    }
+        $data = $this->post('message/template/send', $params, [
+            'query' => [
+                'access_token' => $this->credential->getToken(),
+            ],
+        ]);
 
-    protected function sendRequest($params)
-    {
-        # code...
+        if ($data['errcode'] != 0) {
+            throw new SendTemplateMessageException($data['errmsg'], $data['errcode'], $data);
+        }
     }
 }

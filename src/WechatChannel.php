@@ -2,6 +2,8 @@
 
 namespace Yansongda\LaravelNotificationWechat;
 
+use Illuminate\Notifications\Notification;
+
 class WechatChannel
 {
     /**
@@ -34,6 +36,12 @@ class WechatChannel
     public function send($notifiable, Notification $notification)
     {
         $message = $notification->toWechat($notifiable);
+
+        if ($message->credential != null) {
+            $credential = (new Credential())->setToken($message->credential);
+
+            $this->wechat = new Wechat($credential);
+        }
 
         $params = $message->toJson();
 
