@@ -13,10 +13,10 @@
 - composer
 
 ## 安装
-1. composer
+1. composer  
 `composer require yansongda/larvel-notification-wechat`
 
-2. 注册 serviceprovider （ < laravel 5.5 ）
+2. 注册 serviceprovider （ < laravel 5.5 ）  
 `Yansongda\LaravelNotificationWechat\WechatServiceProvider::class`
 
 ## 使用
@@ -61,7 +61,7 @@ class WechatNotification extends Notification
         return WechatMessage::create($accessToken)
             ->to('oeTKvwYyc3PPAo3As3VRUBGppC0s')
             ->template("0qUpCTpgeYMFbjEKQ4W_D3ZNx5zUzQIfgasgqYX53mg")
-            ->url('http://yanda.net.cn')
+            ->url('http://github.com/yansongda')
             ->data($data);
     }
 }
