@@ -69,7 +69,7 @@ class WechatNotification extends Notification
 
 ### 支持的 WechatMessage 方法
 - `to(string $openid)`: 设置模板消息接收人的 openID
-- `template(string $templateID)`: 设置模板消息接收人的 openID
+- `template(string $templateID)`: 设置模板消息的模板 ID
 - `url(string $url)`: 设置点击模板消息后跳转 url，选填
 - `miniprogram(string $appid, string $pagepath)`: 设置点击模板消息后跳转的小程序，选填
 - `data(array $data)`: 设置模板消息数据
