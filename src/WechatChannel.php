@@ -39,7 +39,7 @@ class WechatChannel
         $message = $notification->toWechat($notifiable);
 
         if (is_string($message->credential)) {
-            $credential = (new Credential())->setToken($message->credential);
+            $credential = (new Credential())->setAccessToken($message->credential);
 
             $this->wechat = new Wechat($credential);
         } elseif ($message->credential instanceof AccessTokenInterface) {

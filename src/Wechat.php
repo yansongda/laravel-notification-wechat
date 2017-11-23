@@ -49,7 +49,7 @@ class Wechat
     {
         $data = $this->post('message/template/send', $params, [
             'query' => [
-                'access_token' => $this->credential->getToken(),
+                'access_token' => $this->credential->getAccessToken(),
             ],
         ]);
 

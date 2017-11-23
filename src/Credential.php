@@ -60,7 +60,7 @@ class Credential implements AccessTokenInterface
      *
      * @param string $token
      */
-    public function setToken($token)
+    public function setAccessToken($token)
     {
         $this->accessToken = $token;
 
@@ -74,14 +74,14 @@ class Credential implements AccessTokenInterface
      *
      * @return string
      */
-    public function getToken()
+    public function getAccessToken()
     {
         if (! isset($this->accessToken)) {
             if (is_null($this->appid) || is_null($this->appsecret)) {
                 throw new AccessTokenException("Appid or appsecret is null", 1);
             }
 
-            $this->accessToken = Cache::remember('wechatAccessToken_' . $this->appid, 7190/60, function () {
+            $this->accessToken = Cache::remember('wechatAccessToken' . $this->appid, 7190/60, function () {
                 $data = $this->get('token', [
                     'grant_type' => 'client_credential',
                     'appid' => $this->appid,

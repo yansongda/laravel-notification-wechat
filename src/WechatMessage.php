@@ -2,7 +2,7 @@
 
 namespace Yansongda\LaravelNotificationWechat;
 
-use Yansongda\Supports\Arr;
+use Yansongda\Supports\Collection;
 
 class WechatMessage
 {
@@ -122,7 +122,7 @@ class WechatMessage
     public function data(array $data)
     {
         foreach ($data as $k => $v) {
-            $this->payload['data'][$k] = is_array($v) ? ['value' => Arr::first($v), 'color' => Arr::last($v)] : ['value' => $v, 'color' => '#173177'];
+            $this->payload['data'][$k] = is_array($v) ? ['value' => (new Collection($v))->first(), 'color' => (new Collection($v))->last()] : ['value' => $v, 'color' => '#173177'];
         }
 
         return $this;

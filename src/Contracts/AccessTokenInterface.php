@@ -11,5 +11,5 @@ interface AccessTokenInterface
      *
      * @return string
      */
-    public function getToken();
+    public function getAccessToken();
 }
