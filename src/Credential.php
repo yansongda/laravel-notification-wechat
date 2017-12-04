@@ -81,7 +81,7 @@ class Credential implements AccessTokenInterface
                 throw new AccessTokenException("Appid or appsecret is null", 1);
             }
 
-            $this->accessToken = Cache::remember('wechatAccessToken' . $this->appid, 7190/60, function () {
+            $this->accessToken = Cache::remember('wechatAccessToken' . $this->appid, 118, function () {
                 $data = $this->get('token', [
                     'grant_type' => 'client_credential',
                     'appid' => $this->appid,
