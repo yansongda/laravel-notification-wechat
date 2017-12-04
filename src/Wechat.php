@@ -54,7 +54,7 @@ class Wechat
         ]);
 
         if ($data['errcode'] != 0) {
-            throw new SendTemplateMessageException($data['errmsg'], $data['errcode'], $data);
+            throw new SendTemplateMessageException($data['errmsg'], $data['errcode'], $data, $this->credential);
         }
 
         return $data;

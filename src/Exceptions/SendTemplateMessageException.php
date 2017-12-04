@@ -12,17 +12,26 @@ class SendTemplateMessageException extends Exception
     public $raw = [];
 
     /**
+     * Credential.
+     *
+     * @var Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface
+     */
+    public $credential;
+
+    /**
      * Bootstrap.
      *
      * @author yansongda <me@yansongda.cn>
      *
      * @param string     $message
      * @param string|int $code
+     * @param Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface | null $credential
      */
-    public function __construct($message, $code, $raw = [])
+    public function __construct($message, $code, $raw = [], $credential = null)
     {
         parent::__construct($message, intval($code));
         
         $this->raw = $raw;
+        $this->credential = $credential;
     }
 }
