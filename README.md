@@ -14,7 +14,7 @@
 
 ## 安装
 1. composer  
-`composer require yansongda/larvel-notification-wechat`
+`composer require yansongda/laravel-notification-wechat`
 
 2. 注册 serviceprovider （ < laravel 5.5 ）  
 `Yansongda\LaravelNotificationWechat\WechatServiceProvider::class`
