@@ -99,4 +99,3 @@ class Credential implements AccessTokenInterface
         return $this->accessToken;
     }
 }
-

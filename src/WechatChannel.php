@@ -30,7 +30,7 @@ class WechatChannel
      * Send the given notification.
      *
      * @author yansongda <me@yansongda.cn>
-     * 
+     *
      * @param  mixed  $notifiable
      * @param  \Illuminate\Notifications\Notification  $notification
      */
