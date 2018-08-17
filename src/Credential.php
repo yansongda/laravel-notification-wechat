@@ -12,6 +12,13 @@ class Credential implements AccessTokenInterface
     use HasHttpRequest;
 
     /**
+     * Wechat access token.
+     *
+     * @var string
+     */
+    public $accessToken;
+
+    /**
      * Wechat appid.
      *
      * @var string
@@ -24,13 +31,6 @@ class Credential implements AccessTokenInterface
      * @var string
      */
     protected $appsecret;
-
-    /**
-     * Wechat access token.
-     *
-     * @var string
-     */
-    public $accessToken;
 
     /**
      * Wechat accessToken getway.

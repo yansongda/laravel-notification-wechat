@@ -21,18 +21,6 @@ class WechatMessage
     public $credential;
 
     /**
-     * Create a new instance.
-     *
-     * @author yansongda <me@yansongda.cn>
-     *
-     * @param mixed $credential
-     */
-    public static function create($credential = null)
-    {
-        return new static($credential);
-    }
-
-    /**
      * Bootstrap.
      *
      * @author yansongda <me@yansongda.cn>
@@ -42,6 +30,18 @@ class WechatMessage
     public function __construct($credential = null)
     {
         $this->credential = $credential;
+    }
+
+    /**
+     * Create a new instance.
+     *
+     * @author yansongda <me@yansongda.cn>
+     *
+     * @param mixed $credential
+     */
+    public static function create($credential = null)
+    {
+        return new static($credential);
     }
 
     /**
