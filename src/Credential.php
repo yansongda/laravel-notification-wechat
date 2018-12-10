@@ -37,7 +37,7 @@ class Credential implements AccessTokenInterface
      *
      * @var string
      */
-    protected $baseUri = "https://api.weixin.qq.com/cgi-bin/";
+    protected $baseUri = 'https://api.weixin.qq.com/cgi-bin/';
 
     /**
      * Bootstap.
@@ -76,20 +76,20 @@ class Credential implements AccessTokenInterface
      */
     public function getAccessToken()
     {
-        if (! isset($this->accessToken)) {
+        if (!isset($this->accessToken)) {
             if (is_null($this->appid) || is_null($this->appsecret)) {
-                throw new AccessTokenException("Appid or appsecret is null", 1);
+                throw new AccessTokenException('Appid or appsecret is null', 1);
             }
 
-            $this->accessToken = Cache::remember('wechatAccessToken' . $this->appid, 118, function () {
+            $this->accessToken = Cache::remember('wechatAccessToken'.$this->appid, 118, function () {
                 $data = $this->get('token', [
                     'grant_type' => 'client_credential',
-                    'appid' => $this->appid,
-                    'secret' => $this->appsecret,
+                    'appid'      => $this->appid,
+                    'secret'     => $this->appsecret,
                 ]);
 
-                if (! isset($data['access_token'])) {
-                    throw new AccessTokenException('Error Get AccessToken:' . $data['errmsg'], $data['errcode'], $data);
+                if (!isset($data['access_token'])) {
+                    throw new AccessTokenException('Error Get AccessToken:'.$data['errmsg'], $data['errcode'], $data);
                 }
 
                 return $data['access_token'];
