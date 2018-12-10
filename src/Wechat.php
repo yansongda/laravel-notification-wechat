@@ -22,7 +22,7 @@ class Wechat
      *
      * @var string
      */
-    protected $baseUri = "https://api.weixin.qq.com/cgi-bin/";
+    protected $baseUri = 'https://api.weixin.qq.com/cgi-bin/';
 
     /**
      * Bootstrap.

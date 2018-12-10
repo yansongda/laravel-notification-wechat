@@ -31,8 +31,8 @@ class WechatChannel
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param mixed                                  $notifiable
+     * @param \Illuminate\Notifications\Notification $notification
      */
     public function send($notifiable, Notification $notification)
     {
