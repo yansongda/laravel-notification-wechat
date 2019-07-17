@@ -17,7 +17,6 @@ class EasyWechatCredential implements AccessTokenInterface
      * Bootstap.
      *
      * @author osi <yaoiluo@gmail.cn>
-     *
      */
     public function __construct()
     {
@@ -47,7 +46,7 @@ class EasyWechatCredential implements AccessTokenInterface
     {
         if (!isset($this->accessToken)) {
             $app = app('wechat.official_account');
-            return $app->access_token->getToken()["access_token"];
+            return $app->access_token->getToken()['access_token'];
         }
 
         return $this->accessToken;
