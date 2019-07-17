@@ -2,19 +2,14 @@
 
 namespace Yansongda\LaravelNotificationWechat\Exceptions;
 
+use Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface;
+
 class SendTemplateMessageException extends Exception
 {
     /**
-     * Error raw data.
-     *
-     * @var array
-     */
-    public $raw = [];
-
-    /**
      * Credential.
      *
-     * @var Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface
+     * @var AccessTokenInterface
      */
     public $credential;
 
@@ -23,15 +18,15 @@ class SendTemplateMessageException extends Exception
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param string                                                                    $message
-     * @param string|int                                                                $code
-     * @param Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface | null $credential
+     * @param string                      $message
+     * @param string|int                  $code
+     * @param array                       $raw
+     * @param AccessTokenInterface | null $credential
      */
-    public function __construct($message, $code, $raw = [], $credential = null)
+    public function __construct($message, $code = Exception::SEND_TEMPLATE_MESSAGE_ERROR, $raw = [], $credential = null)
     {
-        parent::__construct($message, intval($code));
+        parent::__construct($message, $code, $raw);
 
-        $this->raw = $raw;
         $this->credential = $credential;
     }
 }

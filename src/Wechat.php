@@ -29,7 +29,7 @@ class Wechat
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param HttpClient|null $http
+     * @param AccessTokenInterface $credential
      */
     public function __construct(AccessTokenInterface $credential)
     {
@@ -42,6 +42,8 @@ class Wechat
      * @author yansongda <me@yansongda.cn>
      *
      * @param string $params
+     *
+     * @throws SendTemplateMessageException
      *
      * @return array
      */

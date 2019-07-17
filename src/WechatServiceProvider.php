@@ -11,22 +11,17 @@ class WechatServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (class_exists('EasyWeChat\Factory')) {
-            // 如果用了easywechat
-            $this->app->when(WechatChannel::class)
-                ->needs(Wechat::class)
-                ->give(function () {
-                    return new Wechat(new EasyWechatCredential());
-                });
-        } else {
-            $this->app->when(WechatChannel::class)
-                ->needs(Wechat::class)
-                ->give(function () {
-                    return new Wechat(
-                        new Credential(config('services.wechat.appid'), config('services.wechat.appsecret'))
-                    );
-                });
-        }
+        $this->app->when(WechatChannel::class)
+            ->needs(Wechat::class)
+            ->give(function () {
+                $credential = new DefaultCredential(config('services.wechat.appid'), config('services.wechat.appsecret'));
+
+                if (class_exists('EasyWeChat\Factory')) {
+                    $credential = new EasyWechatCredential();
+                }
+
+                return new Wechat($credential);
+            });
     }
 
     /**

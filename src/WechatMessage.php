@@ -38,6 +38,8 @@ class WechatMessage
      * @author yansongda <me@yansongda.cn>
      *
      * @param mixed $credential
+     *
+     * @return WechatMessage
      */
     public static function create($credential = null)
     {
@@ -122,14 +124,16 @@ class WechatMessage
     public function data(array $data)
     {
         foreach ($data as $k => $v) {
-            $this->payload['data'][$k] = is_array($v) ? ['value' => (new Collection($v))->first(), 'color' => (new Collection($v))->last()] : ['value' => $v, 'color' => '#173177'];
+            $this->payload['data'][$k] = is_array($v) ?
+                ['value' => (new Collection($v))->first(), 'color' => (new Collection($v))->last()] :
+                ['value' => $v, 'color' => '#173177'];
         }
 
         return $this;
     }
 
     /**
-     * Convent payload to json formate.
+     * Convent payload to json format.
      *
      * @author yansongda <me@yansongda.cn>
      *

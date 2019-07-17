@@ -4,6 +4,7 @@ namespace Yansongda\LaravelNotificationWechat;
 
 use Illuminate\Notifications\Notification;
 use Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface;
+use Yansongda\LaravelNotificationWechat\Exceptions\SendTemplateMessageException;
 
 class WechatChannel
 {
@@ -31,15 +32,24 @@ class WechatChannel
      *
      * @author yansongda <me@yansongda.cn>
      *
-     * @param mixed                                  $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param mixed        $notifiable
+     * @param Notification $notification
+     *
+     * @throws Exceptions\SendTemplateMessageException
+     *
+     * @return array
      */
     public function send($notifiable, Notification $notification)
     {
+        /* @var WechatMessage $message */
+        if (!method_exists($notification, 'toWechat')) {
+            throw new SendTemplateMessageException('Missing ToWechat Method In Wechat Channel', SendTemplateMessageException::MISSING_TOWECHAT_METHOD);
+        }
+
         $message = $notification->toWechat($notifiable);
 
         if (is_string($message->credential)) {
-            $credential = (new Credential())->setAccessToken($message->credential);
+            $credential = (new DefaultCredential())->setAccessToken($message->credential);
 
             $this->wechat = new Wechat($credential);
         } elseif ($message->credential instanceof AccessTokenInterface) {
