@@ -80,6 +80,7 @@ class WechatNotification extends Notification
 - 直接传递 accesstoken 值到 `WechatMessage::create($accesstoken)` 方法中，如上例所示；
 - 传递一个 `Yansongda\LaravelNotificatinoWechat\Contracts\AccessTokenInterface` 类到 `WechatMessage::create($CredentialClass)` 方法；
 - 直接在 config 文件夹中的 services.php 中添加 `'wechat' => ['appid' => 'xxx', 'appsecret' => 'xxx']`，系统将自动获取 accesstoken 并缓存，缓存的 key 为 `wechatAccessToken您的APPID` 您可以直接通过 laravel 的 Cache Facade 获取缓存的 accesstoken，当然，最保险的方案是通过 `(new Yansongda\LaravelNotificationWechat\Credential($appid, $appsecret))->getAccessToken()` 去获取 accesstoken。
+- 若使用EasyWechat(laravel包)且正常通信后，`WechatMessage::create()` 参数留空即可
 
 具体可查看源码。
 
