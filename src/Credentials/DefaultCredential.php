@@ -1,6 +1,6 @@
 <?php
 
-namespace Yansongda\LaravelNotificationWechat;
+namespace Yansongda\LaravelNotificationWechat\Credentials;
 
 use Illuminate\Support\Facades\Cache;
 use Yansongda\LaravelNotificationWechat\Contracts\AccessTokenInterface;
